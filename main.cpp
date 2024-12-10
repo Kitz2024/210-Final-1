@@ -20,15 +20,9 @@ struct Node {
 
 };
 
-//Struct for other Vendors
-struct customerBooth {
-    string name;
-    string drinkOrder;
-};
-
 //Function to add new customer to Linked List
-void enqueue(Node*& head, Node*& tail, const string& name, const string& order){
-    Node* newNode = new Node(name, order);
+void enqueue(Node*& head, Node*& tail, const string& name, const string& drinkOrder){
+    Node* newNode = new Node(name, drinkOrder);
     if (!tail){
         head = tail = newNode;
     } else {
@@ -62,6 +56,22 @@ void CoffeeBooth(Node*& head, Node*& tail, const vector<string>& names, const ve
         int customerIndex = rand() % names.size();
         int customerOrder = rand() % order.size();
         cout << "New Customer Joined Coffee Booth: " << names[customerIndex] << " - " << order[customerOrder] << "\n";
+    }
+}
+
+//Struct for other Vendors
+struct customerBooth {
+    string name;
+    string order;
+};
+
+void muffinBooth(deque<customerBooth>& queue, const vector<string>& names, const vector<string>& order){
+    if (!queue.empty()){
+        auto customer = queue.front();
+        cout << "serving muffin(s) to: " << customer.name << " - " << customer.order << "\n";
+        queue.pop_front();
+    } else {
+        cout << "Muffin Booth Empty.\n";
     }
 }
 
