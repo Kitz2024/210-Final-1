@@ -90,6 +90,24 @@ void friendBraceltBooth(vector<customerBooth>& queue, const vector<string>& name
         cout << "New Customer joined the Friendship Bracelet Booth: " << names[customerIndex] << " - " << orders[customerOrder]<< "\n";
     }
 }
+
+//Book booth
+
+void bookBooth (deque<customerBooth>& queue, const vector<string>& names, const vector<string> & orders){
+    if (!queue.empty()){
+    auto customer = queue.front();
+    cout << "Serving book to: " << customer.name << " - " << customer.order;
+    queue.pop_front();
+    } else {
+        cout << "book Booth empty.\n";
+    }
+    if (rand() % 2 == 0 ){
+        int customerIndex = rand() % names.size();
+        int customerOrder = rand() % orders.size();
+        queue.push_back({names[customerIndex], orders[customerOrder]});
+        cout << "New Customer joiend the Book Booth: " << names[customerIndex] << " - " << orders[customerOrder]<< "\n";
+    }
+}
     
 int main (){
 
@@ -100,6 +118,7 @@ int main (){
     vector<string> coffeeOrders = {"Latte", "Espresso", "Cappuccino"};
     vector<string> muffinOrders = {"Blueberry", "Chocolate", "Red Velvet"};
     vector<string> friendBraceltOrders = {"Red", "Blue", "Green", "Rainbow"};
+    vector<string> bookOrders = {"Fantasy", "Fiction", "Non-Fiction", "Sci-fi"};
 
     //Coffee booth Linked List
     Node* coffeeHead = nullptr;
@@ -117,8 +136,9 @@ int main (){
     //Friendship Bracelet Booth (Vector)
     vector<customerBooth> braceletQueue;
 
-    //Icecream Booth (Queue)
-    priority_queue<pair<int, customerBooth>> iceCreamQueue;
+    //Book Booth (deque)
+    deque<customerBooth> bookQueue;
+
 
     //Simulation
     for (int boothRound = 1; boothRound <= 10; ++boothRound){
@@ -132,7 +152,10 @@ int main (){
 
         cout << "\nFriendship bracelet Booth:\n";
         friendBraceltBooth(braceletQueue, names, friendBraceltOrders);
-        
+
+        cout << "\nBook Booth\n";
+        bookBooth (bookQueue, names, bookOrders);
+
     }
 
     while (coffeeHead) dequeue(coffeeHead, coffeeTail);

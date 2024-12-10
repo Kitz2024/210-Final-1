@@ -3,6 +3,9 @@
         "deque": "cpp",
         "vector": "cpp",
         "queue": "cpp",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "utility": "cpp",
+        "system_error": "cpp",
+        "xlocale": "cpp"
     }
 }
