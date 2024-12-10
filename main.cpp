@@ -5,7 +5,7 @@
 #include <vector>
 #include <deque>
 #include <queue>
-#include <ctime>
+#include <ctime> //Random Generator
 
 using namespace std;
 
@@ -65,7 +65,7 @@ struct customerBooth {
     string order;
 };
 
-void muffinBooth(deque<customerBooth>& queue, const vector<string>& names, const vector<string>& order){
+void muffinBooth(deque<customerBooth>& queue, const vector<string>& names, const vector<string>& orders){
     if (!queue.empty()){
         auto customer = queue.front();
         cout << "serving muffin(s) to: " << customer.name << " - " << customer.order << "\n";
@@ -75,9 +75,16 @@ void muffinBooth(deque<customerBooth>& queue, const vector<string>& names, const
     }
     if(rand() % 2 == 0){
         int customerIndex = rand() % names.size();
-        int customerOrder = rand() % order.size();
-        queue.push_back({names[customerIndex], order[customerOrder]});
-        cout << "New Customer joined the Muffin Booth: " << names[customerIndex] << " - " << order [customerOrder] << "\n";
+        int customerOrder = rand() % orders.size();
+        queue.push_back({names[customerIndex], orders[customerOrder]});
+        cout << "New Customer joined the Muffin Booth: " << names[customerIndex] << " - " << orders[customerOrder] << "\n";
+    }
+}
+
+void friendBraceltBooth (vector<customerBooth>& queue, const vector<string>& names, const vector<string> & orders){
+    if (!queue.empty()){
+        auto customer = queue.front();
+        cout << "Serving Friendship Bracelet to: " << customer.name << " - " << customer.order << "\n";
     }
 }
 
@@ -88,6 +95,7 @@ int main (){
     vector<string> names = {"Ryan", "Harry", "Lisa", "Elizabeth", "Max"};
     vector<string> coffeeOrders = {"Latte", "Espresso", "Cappuccino"};
     vector<string> muffinOrders = {"Blueberry", "Chocolate", "Red Velvet", "Banana"};
+
 
     //Coffee booth Linked List
     Node* coffeeHead = nullptr;
@@ -100,6 +108,18 @@ int main (){
         enqueue(coffeeHead, coffeeTail, names[customerIndex], coffeeOrders[customerOrder]);
     }
 
+    //Simulation
+    for (int boothRound = 1; boothRound <= 10; ++boothRound){
+        cout << " Rounds " << boothRound;
 
+        cout << "\nCoffee Booth:\n";
+        
+        cout << "\nMuffin Booth:\n";
+
+        cout << "\nFriendship bracelet Booth:\n";
+
+        cout << "\nArt Booth:\n";
+
+    }
     return 0;
 }
