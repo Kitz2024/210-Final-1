@@ -1,12 +1,11 @@
 //Kit Pollinger
-//210 Final Part 1
+//210 Final Exam
 #include <iostream>
 #include <string>
 #include <vector>
 #include <deque>
 #include <queue>
 #include <ctime> //Random Generator
-
 using namespace std;
 
 //Customers Name and Drink Order
@@ -97,7 +96,7 @@ void friendBraceltBooth(vector<customerBooth>& queue, const vector<string>& name
         cout << "New Customer joined the Friendship Bracelet Booth: " << names[customerIndex] << " - " << orders[customerOrder]<< "\n";
     }
 }
-
+//Ice Cream Booth
 void iceCreamBooth(priority_queue<pair<int, customerBooth>>& queue, const vector<string>& names, const vector<string>& orders){
     if (!queue.empty()){
         auto customer = queue.top();
@@ -106,17 +105,25 @@ void iceCreamBooth(priority_queue<pair<int, customerBooth>>& queue, const vector
     } else {
         cout << "Ice Cream Booth empty.\n";
     }
+    if (rand() % 2 == 0){
+        int customerIndex = rand() % names.size();
+        int customerOrder = rand() % orders.size();
+        int priority = rand() % 100;
+        queue.push({priority, {names[customerIndex], orders[customerOrder]}});
+        cout << "New Customer joined the Ice Cream Booth: " <<  names[customerIndex] << " - " << orders[customerOrder] << " priority" << priority << "\n";
+    }
 }
     
-
 int main (){
+
     srand(static_cast<unsigned int>(time(0)));
 
     //Customer Names
     vector<string> names = {"Ryan", "Harry", "Max"};
-    vector<string> coffeeOrders = {"Latte", "Espresso", "Cappuccino", "Decafe"};
+    vector<string> coffeeOrders = {"Latte", "Espresso", "Cappuccino", "Decaf"};
     vector<string> muffinOrders = {"Blueberry", "Chocolate", "Red Velvet", "Banana"};
-    vector<string> friendBraceltBooth = {"Red", "Blue", "Green", "Rainbow"};
+    vector<string> friendBraceltBooth = {"Red", "Blue", "Green", "Rainbow", "White", "Black"};
+    vector<string> iceCreamBooth = {"Vanilla", "Chocolate", "Pistachio","Rocky Road", "Strawberry"};
 
     //Coffee booth Linked List
     Node* coffeeHead = nullptr;
@@ -146,9 +153,9 @@ int main (){
         cout << "\nFriendship bracelet Booth:\n";
 
         cout << "\nIceCream Booth:\n";
-
     }
 
-    //Cleaning Linked List
+    //clear Linked List
+    while (coffeeHead) dequeue(coffeeHead, coffeeTail);
     return 0;
 }
