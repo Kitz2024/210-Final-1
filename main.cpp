@@ -82,7 +82,7 @@ void muffinBooth(deque<customerBooth>& queue, const vector<string>& names, const
 }
 
 //Bracelet Booth
-void friendBraceltBooth (vector<customerBooth>& queue, const vector<string>& names, const vector<string> & orders){
+void friendBraceltBooth(vector<customerBooth>& queue, const vector<string>& names, const vector<string> & orders){
     if (!queue.empty()){
         auto customer = queue.front();
         cout << "Serving Friendship Bracelet to: " << customer.name << " - " << customer.order << "\n";
@@ -98,6 +98,17 @@ void friendBraceltBooth (vector<customerBooth>& queue, const vector<string>& nam
     }
 }
 
+void iceCreamBooth(priority_queue<pair<int, customerBooth>>& queue, const vector<string>& names, const vector<string>& orders){
+    if (!queue.empty()){
+        auto customer = queue.top();
+        cout << "Serving Ice Cream to : " << customer.second.name << "\n";
+        queue.pop();
+    } else {
+        cout << "Ice Cream Booth empty.\n";
+    }
+}
+    
+
 int main (){
     srand(static_cast<unsigned int>(time(0)));
 
@@ -106,7 +117,6 @@ int main (){
     vector<string> coffeeOrders = {"Latte", "Espresso", "Cappuccino", "Decafe"};
     vector<string> muffinOrders = {"Blueberry", "Chocolate", "Red Velvet", "Banana"};
     vector<string> friendBraceltBooth = {"Red", "Blue", "Green", "Rainbow"};
-
 
     //Coffee booth Linked List
     Node* coffeeHead = nullptr;
@@ -122,6 +132,8 @@ int main (){
 
     //Friendship Bracelet Booth (Vector)
 
+    //Icecream Booth (Queue)
+
     //Simulation
     for (int boothRound = 1; boothRound <= 10; ++boothRound){
         cout << " Rounds " << boothRound;
@@ -133,7 +145,7 @@ int main (){
 
         cout << "\nFriendship bracelet Booth:\n";
 
-        cout << "\nArt Booth:\n";
+        cout << "\nIceCream Booth:\n";
 
     }
 
