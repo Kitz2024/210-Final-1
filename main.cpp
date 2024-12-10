@@ -73,6 +73,12 @@ void muffinBooth(deque<customerBooth>& queue, const vector<string>& names, const
     } else {
         cout << "Muffin Booth Empty.\n";
     }
+    if(rand() % 2 == 0){
+        int customerIndex = rand() % names.size();
+        int customerOrder = rand() % order.size();
+        queue.push_back({names[customerIndex], order[customerOrder]});
+        cout << "New Customer joined the Muffin Booth: " << names[customerIndex] << " - " << order [customerOrder] << "\n";
+    }
 }
 
 int main (){
@@ -81,6 +87,7 @@ int main (){
     //Customer Names
     vector<string> names = {"Ryan", "Harry", "Lisa", "Elizabeth", "Max"};
     vector<string> coffeeOrders = {"Latte", "Espresso", "Cappuccino"};
+    vector<string> muffinOrders = {"Blueberry", "Chocolate", "Red Velvet", "Banana"};
 
     //Coffee booth Linked List
     Node* coffeeHead = nullptr;
@@ -92,5 +99,7 @@ int main (){
         int customerOrder = rand() % names.size();
         enqueue(coffeeHead, coffeeTail, names[customerIndex], coffeeOrders[customerOrder]);
     }
+
+
     return 0;
 }
