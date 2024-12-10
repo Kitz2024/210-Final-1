@@ -12,17 +12,17 @@ using namespace std;
 //Customers Name and Drink Order
 struct Node {
     string name;
-    string drinkOrder;
+    string order;
     Node* next;
 
-    Node (const string& name, const string& drinkOrder)
-    : name(name),drinkOrder(drinkOrder), next(nullptr){}
+    Node (const string& name, const string& order)
+    : name(name),order(order), next(nullptr){}
 
 };
 
 //Function to add new customer to Linked List
-void enqueue(Node*& head, Node*& tail, const string& name, const string& drinkOrder){
-    Node* newNode = new Node(name, drinkOrder);
+void enqueue(Node*& head, Node*& tail, const string& name, const string& order){
+    Node* newNode = new Node(name, order);
     if (!tail){
         head = tail = newNode;
     } else {
@@ -43,9 +43,9 @@ void dequeue(Node*& head, Node*& tail){
 
 }
 //Coffee Booth
-void CoffeeBooth(Node*& head, Node*& tail, const vector<string>& names, const vector<string>& order){
+void CoffeeBooth(Node*& head, Node*& tail, const vector<string>& names, const vector<string>& orders){
     if (head){
-        cout << "Serving Coffee to: " << head->name << " - " << head->drinkOrder << "\n";
+        cout << "Serving Coffee to: " << head->name << " - " << head->order << "\n";
         dequeue(head,tail);
     } else {
         cout << "Coffee booth empty. \n";
@@ -54,8 +54,8 @@ void CoffeeBooth(Node*& head, Node*& tail, const vector<string>& names, const ve
     // 50% probability new Customer
     if(rand() % 2 == 0){
         int customerIndex = rand() % names.size();
-        int customerOrder = rand() % order.size();
-        cout << "New Customer Joined Coffee Booth: " << names[customerIndex] << " - " << order[customerOrder] << "\n";
+        int customerOrder = rand() % orders.size();
+        cout << "New Customer joined Coffee Booth: " << names[customerIndex] << " - " << orders[customerOrder] << "\n";
     }
 }
 
@@ -81,10 +81,20 @@ void muffinBooth(deque<customerBooth>& queue, const vector<string>& names, const
     }
 }
 
+//Bracelet Booth
 void friendBraceltBooth (vector<customerBooth>& queue, const vector<string>& names, const vector<string> & orders){
     if (!queue.empty()){
         auto customer = queue.front();
         cout << "Serving Friendship Bracelet to: " << customer.name << " - " << customer.order << "\n";
+        queue.erase(queue.begin());
+    }else {
+        cout << "Friendship Bracelet Booth Empty.\n";
+    }
+    if(rand() % 2 == 0){
+        int customerIndex = rand() % names.size();
+        int customerOrder = rand() % orders.size();
+        queue.push_back({names[customerIndex], orders[customerOrder]});
+        cout << "New Customer joined the Friendship Bracelet Booth: " << names[customerIndex] << " - " << orders[customerOrder]<< "\n";
     }
 }
 
@@ -92,27 +102,32 @@ int main (){
     srand(static_cast<unsigned int>(time(0)));
 
     //Customer Names
-    vector<string> names = {"Ryan", "Harry", "Lisa", "Elizabeth", "Max"};
-    vector<string> coffeeOrders = {"Latte", "Espresso", "Cappuccino"};
+    vector<string> names = {"Ryan", "Harry", "Max"};
+    vector<string> coffeeOrders = {"Latte", "Espresso", "Cappuccino", "Decafe"};
     vector<string> muffinOrders = {"Blueberry", "Chocolate", "Red Velvet", "Banana"};
+    vector<string> friendBraceltBooth = {"Red", "Blue", "Green", "Rainbow"};
 
 
     //Coffee booth Linked List
     Node* coffeeHead = nullptr;
     Node* coffeeTail = nullptr;
 
-    //Coffee (Linked list)
     for (int i = 0; i < 3; i++){
         int customerIndex = rand() % names.size();
         int customerOrder = rand() % names.size();
         enqueue(coffeeHead, coffeeTail, names[customerIndex], coffeeOrders[customerOrder]);
     }
 
+    //Muffin Booth (deque)
+
+    //Friendship Bracelet Booth (Vector)
+
     //Simulation
     for (int boothRound = 1; boothRound <= 10; ++boothRound){
         cout << " Rounds " << boothRound;
 
         cout << "\nCoffee Booth:\n";
+        CoffeeBooth(coffeeHead, coffeeTail, names, coffeeOrders);
         
         cout << "\nMuffin Booth:\n";
 
@@ -121,5 +136,7 @@ int main (){
         cout << "\nArt Booth:\n";
 
     }
+
+    //Cleaning Linked List
     return 0;
 }
