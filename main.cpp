@@ -16,7 +16,6 @@ struct Node {
 
     Node (const string& name, const string& order)
     : name(name),order(order), next(nullptr){}
-
 };
 
 //Function to add new customer to Linked List
@@ -29,7 +28,6 @@ void enqueue(Node*& head, Node*& tail, const string& name, const string& order){
         tail = newNode;
     }
 }
-
 //Function to serve to a customer
 void dequeue(Node*& head, Node*& tail){
 
@@ -39,7 +37,6 @@ void dequeue(Node*& head, Node*& tail){
 
     if (!head) tail = nullptr; //if empty
     delete temp;
-
 }
 //Coffee Booth
 void CoffeeBooth(Node*& head, Node*& tail, const vector<string>& names, const vector<string>& orders){
@@ -57,13 +54,11 @@ void CoffeeBooth(Node*& head, Node*& tail, const vector<string>& names, const ve
         cout << "New Customer joined Coffee Booth: " << names[customerIndex] << " - " << orders[customerOrder] << "\n";
     }
 }
-
 //Struct for other Vendors
 struct customerBooth {
     string name;
     string order;
 };
-
 void muffinBooth(deque<customerBooth>& queue, const vector<string>& names, const vector<string>& orders){
     if (!queue.empty()){
         auto customer = queue.front();
@@ -79,7 +74,6 @@ void muffinBooth(deque<customerBooth>& queue, const vector<string>& names, const
         cout << "New Customer joined the Muffin Booth: " << names[customerIndex] << " - " << orders[customerOrder] << "\n";
     }
 }
-
 //Bracelet Booth
 void friendBraceltBooth(vector<customerBooth>& queue, const vector<string>& names, const vector<string> & orders){
     if (!queue.empty()){
@@ -157,5 +151,6 @@ int main (){
 
     //clear Linked List
     while (coffeeHead) dequeue(coffeeHead, coffeeTail);
+    
     return 0;
 }
